@@ -9,8 +9,8 @@ const year = new Date().getFullYear();
                 <a href="/" class="btn btn-ghost text-xl">🐦 Chirper</a>
             </div>
             <div class="navbar-end gap-2">
-                <a href="#" class="btn btn-ghost btn-sm">Sign In</a>
-                <a href="#" class="btn btn-primary btn-sm">Sign Up</a>
+                <a href="/login" class="btn btn-ghost btn-sm">Login</a>
+                <a href="/register" class="btn btn-primary btn-sm">Register</a>
             </div>
         </nav>
 

@@ -1,23 +1,38 @@
 <script>
+import ChirpModule from "../components/ChirpModule.vue";
 import mainLayout from "../layouts/mainLayout.vue";
+import ChirpDisplay from "../components/ChirpDisplay.vue";
 
 export default {
     layout: mainLayout,
+    components: {
+        ChirpModule,
+        ChirpDisplay
+    },
+    methods: {
+        handleChirpSubmit(chirpText) {
+            this.$inertia.post(
+                "/chirps",
+                { message: chirpText },
+                {
+                    onSuccess: () => {
+                        this.$emit("chirp-submitted");
+                    },
+                    onError: (errors) => {
+                        console.error("Error submitting chirp:", errors);
+                    },
+                },
+            );
+        },
+    },
 };
 </script>
 
 <template>
     <div class="max-w-2xl mx-auto">
         <div class="card bg-base-100 shadow mt-8">
-            <div class="card-body">
-                <div>
-                    <h1 class="text-3xl font-bold">Welcome to Chirper!</h1>
-                    <p class="mt-4 text-base-content/60">
-                        This is your brand new Laravel application. Time to
-                        make it sing (or chirp)!
-                    </p>
-                </div>
-            </div>
+            <ChirpModule @submit-chirp="handleChirpSubmit" />
+            <ChirpDisplay :chirps="$page.props.chirps" />
         </div>
     </div>
 </template>
