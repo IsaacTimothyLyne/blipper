@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup>
+const year = new Date().getFullYear();
+</script>
 
 <template>
-    <body class="min-h-screen flex flex-col bg-base-200 font-sans">
+    <div class="min-h-screen flex flex-col bg-base-200 font-sans">
         <nav class="navbar bg-base-100">
             <div class="navbar-start">
                 <a href="/" class="btn btn-ghost text-xl">🐦 Chirper</a>
@@ -20,8 +22,8 @@
             class="footer footer-center p-5 bg-base-300 text-base-content text-xs"
         >
             <div>
-                <p>© {{ date("Y") }} Chirper - Built with Laravel and ❤️</p>
+                <p>© {{ year }} Chirper - Built with Laravel and ❤️</p>
             </div>
         </footer>
-    </body>
+    </div>
 </template>
