@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
     <div class="min-h-screen flex flex-col bg-base-200 font-sans">
         <nav class="navbar bg-base-100">
             <div class="navbar-start">
-                <a href="/" class="btn btn-ghost text-xl">🐦 Chirper</a>
+                <a href="/" class="btn btn-ghost text-xl">💬 Blipper</a>
             </div>
             <div class="navbar-end gap-2">
                 <a href="/login" class="btn btn-ghost btn-sm">Login</a>
@@ -22,7 +22,7 @@ const year = new Date().getFullYear();
             class="footer footer-center p-5 bg-base-300 text-base-content text-xs"
         >
             <div>
-                <p>© {{ year }} Chirper - Built with Laravel and ❤️</p>
+                <p>© {{ year }} Isaac Lyne - Built with Laravel, Vue, Inertia and Tailwind CSS</p>
             </div>
         </footer>
     </div>

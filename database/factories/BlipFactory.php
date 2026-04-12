@@ -2,14 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Models\chirp;
+use App\Models\Blip;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<chirp>
+ * @extends Factory<Blip>
  */
-class ChirpFactory extends Factory
+class BlipFactory extends Factory
 {
+    protected $model = Blip::class;
+
     /**
      * Define the model's default state.
      *

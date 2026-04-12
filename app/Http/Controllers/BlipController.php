@@ -2,48 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\ChirpRequest;
-use App\Models\chirp;
+use App\Http\Requests\BlipRequest;
+use App\Models\Blip;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class ChirpController extends Controller
+class BlipController extends Controller
 {
     use AuthorizesRequests;
 
     public function index()
     {
         return Inertia::render('home', [
-            'chirps' => Chirp::with('user')->latest()->get(),
+            'blips' => Blip::with('user')->latest()->get(),
         ]);
     }
 
-    public function store(ChirpRequest $request)
+    public function store(BlipRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = Auth::id();
 
-        Chirp::create($data);
+        Blip::create($data);
         return redirect()->route('home');
     }
 
-    public function destroy(Chirp $chirp)
+    public function destroy(Blip $blip)
     {
-        $this->authorize('delete', $chirp);
+        $this->authorize('delete', $blip);
 
-        $chirp->delete();
+        $blip->delete();
         return redirect()->route('home');
     }
 
-    public function update(ChirpRequest $request, Chirp $chirp)
+    public function update(BlipRequest $request, Blip $blip)
     {
-        $this->authorize('update', $chirp);
+        $this->authorize('update', $blip);
 
         $data = $request->validated();
 
-        $chirp->update($data);
+        $blip->update($data);
         return redirect()->route('home');
     }
 }

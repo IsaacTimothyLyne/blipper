@@ -18,13 +18,18 @@ const submit = () => {
 };
 </script>
 <template>
-    <div class="max-w-md mx-auto">
-        <div class="card bg-base-100 shadow mt-8">
+    <div class="max-w-md mx-auto space-y-4">
+        <section class="rounded-2xl border border-red-200 bg-gradient-to-br from-red-50 to-rose-100 p-4">
+            <h1 class="text-xl font-black text-red-900 tracking-tight">Create Your Blipper Account</h1>
+            <p class="text-sm text-red-700">Join in and start sharing quick blips.</p>
+        </section>
+
+        <div class="card bg-base-100 shadow-lg border border-base-300">
             <div class="card-body">
                 <h2 class="card-title
                     text-2xl font-bold text-center mb-4 align-middle justify-center"
                 >
-                    Register for Chirper
+                    Register for Blipper
                 </h2>
                 <form @submit.prevent="submit" class="space-y-4">
                     <div>

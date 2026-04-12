@@ -2,16 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ChirpSeeder extends Seeder
+class BlipSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        \App\Models\Chirp::factory()->count(50)->create();
+        \App\Models\Blip::factory()->count(50)->create();
     }
 }

@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Database\Factories\ChirpFactory;
+use Database\Factories\BlipFactory;
 
 
 #[Fillable(['user_id', 'message'])]
-class chirp extends Model
+class Blip extends Model
 {
-    /** @use HasFactory<\Database\Factories\ChirpFactory> */
+    /** @use HasFactory<\Database\Factories\BlipFactory> */
     use HasFactory;
+
+    protected $table = 'chirps';
 
     protected function casts(): array
     {

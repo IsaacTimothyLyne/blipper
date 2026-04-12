@@ -1,9 +1,8 @@
 <?php
 
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [App\Http\Controllers\ChirpController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\BlipController::class, 'index'])->name('home');
 
 
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
@@ -13,5 +12,5 @@ Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, '
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register.form');
 
 
-// Chirping
-Route::resource('chirps', App\Http\Controllers\ChirpController::class)->only(['index', 'store', 'destroy', 'update']);
+// Blips
+Route::resource('blips', App\Http\Controllers\BlipController::class)->only(['index', 'store', 'destroy', 'update']);
