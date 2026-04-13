@@ -9,13 +9,24 @@ export default {
         BlipComposer,
         BlipFeed,
     },
+    data() {
+        return {
+            blipSounds: [3, 4, 5, 6, 7, 8, 9, 10].map(n => `/sounds/Blip${n}.wav`),
+        };
+    },
     methods: {
         handleBlipSubmit(blipText) {
+            const sound = this.blipSounds[Math.floor(Math.random() * this.blipSounds.length)];
+            new Audio(sound).play();
             this.$inertia.post(
                 "/blips",
                 { message: blipText },
                 {
                     preserveScroll: true,
+                    onSuccess: () => {
+                        // Clear the blip text after successful submission
+                        this.$refs.blipComposer.blipText = "";
+                    },
                     onError: (errors) => {
                         console.error("Error submitting blip:", errors);
                     },
@@ -34,7 +45,7 @@ export default {
         </section>
 
         <div class="card bg-base-100 shadow-lg border border-base-300">
-            <BlipComposer @submit-blip="handleBlipSubmit" />
+            <BlipComposer @submit-blip="handleBlipSubmit" :is-logged-in="$page.props.auth?.user?.id || false" />
             <BlipFeed
                 :blips="$page.props.blips"
                 :current-user-id="$page.props.auth?.user?.id || null"

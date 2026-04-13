@@ -11,6 +11,8 @@ Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLog
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register.form');
 
+Route::post('/signOut', [App\Http\Controllers\Auth\SignOutController::class, 'signOut'])->name('signOut');
+
 
 // Blips
 Route::resource('blips', App\Http\Controllers\BlipController::class)->only(['index', 'store', 'destroy', 'update']);

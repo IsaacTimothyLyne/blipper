@@ -1,6 +1,12 @@
 <!-- Blip module for submitting short updates -->
 <script>
 export default {
+    props: {
+        isLoggedIn: {
+            type: Boolean,
+            default: false,
+        },
+    },
     data() {
         return {
             blipText: "",
@@ -9,7 +15,8 @@ export default {
 };
 </script>
 <template>
-    <div class="card bg-base-100 shadow rounded-none rounded-t-2xl border-b border-base-300">
+    <!-- only show blip composer if user is authenticated, otherwise show a message -->
+    <div v-if="isLoggedIn" class="card bg-base-100 shadow rounded-none rounded-t-2xl border-b border-base-300">
         <div class="card-body">
             <form @submit.prevent="$emit('submit-blip', blipText)" class="space-y-4">
                 <div>
@@ -30,6 +37,11 @@ export default {
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+    <div v-else class="card bg-base-100 shadow rounded-none rounded-t-2xl border-b border-base-300">
+        <div class="card-body">
+            <p class="text-center">Please log in to post a blip.</p>
         </div>
     </div>
 </template>

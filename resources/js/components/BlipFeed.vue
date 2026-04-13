@@ -1,4 +1,5 @@
 <script>
+import ConfirmDeleteBlipModal from "./ConfirmDeleteBlipModal.vue";
 export default {
     props: {
         blips: {
@@ -10,10 +11,15 @@ export default {
             default: null,
         },
     },
+    components: {
+        ConfirmDeleteBlipModal,
+    },
     data() {
         return {
             editingId: null,
             editMessage: "",
+            showDeleteModal: false,
+            blipToDelete: null,
         };
     },
     methods: {
@@ -44,13 +50,18 @@ export default {
             );
         },
         deleteBlip(blipId) {
-            if (!confirm("Delete this blip?")) {
-                return;
+            // open confirmdeleteblipmodal which emits confirm on confirm, then delete the blip
+            this.blipToDelete = blipId;
+            this.showDeleteModal = true;
+        },
+        confirmDelete() {
+            if (this.blipToDelete !== null) {
+                this.$inertia.delete(`/blips/${this.blipToDelete}`, {
+                    preserveScroll: true,
+                });
+                this.blipToDelete = null;
+                this.showDeleteModal = false;
             }
-
-            this.$inertia.delete(`/blips/${blipId}`, {
-                preserveScroll: true,
-            });
         },
     },
 };
@@ -58,26 +69,16 @@ export default {
 
 <template>
     <div class="space-y-4 p-4">
-        <div
-            v-if="blips.length === 0"
-            class="rounded-xl border border-dashed border-red-200 bg-red-50 px-4 py-6 text-center text-red-800"
-        >
+        <div v-if="blips.length === 0"
+            class="rounded-xl border border-dashed border-red-200 bg-red-50 px-4 py-6 text-center text-red-800">
             No blips yet. Be the first to post one.
         </div>
 
-        <div
-            v-for="blip in blips"
-            :key="blip.id"
-            class="card shadow border"
-            :class="isOwnBlip(blip) ? 'bg-red-50 border-red-200' : 'bg-base-100 border-base-300'"
-        >
+        <div v-for="blip in blips" :key="blip.id" class="card shadow border"
+            :class="isOwnBlip(blip) ? 'bg-red-50 border-red-200' : 'bg-base-100 border-base-300'">
             <div class="card-body">
                 <template v-if="editingId === blip.id">
-                    <textarea
-                        v-model="editMessage"
-                        class="textarea textarea-bordered w-full"
-                        rows="3"
-                    />
+                    <textarea v-model="editMessage" class="textarea textarea-bordered w-full" rows="3" />
                     <div class="flex justify-end gap-2 mt-2">
                         <button class="btn btn-sm" @click="cancelEdit">Cancel</button>
                         <button class="btn btn-sm btn-error" @click="saveEdit(blip.id)">Save</button>
@@ -100,4 +101,5 @@ export default {
             </div>
         </div>
     </div>
+    <ConfirmDeleteBlipModal v-if="showDeleteModal" @confirm-delete="confirmDelete" @cancel="showDeleteModal = false" />
 </template>

@@ -8,9 +8,15 @@ const year = new Date().getFullYear();
             <div class="navbar-start">
                 <a href="/" class="btn btn-ghost text-xl">💬 Blipper</a>
             </div>
-            <div class="navbar-end gap-2">
+            <div class="navbar-end gap-2" v-if="!$page.props.auth.user">
                 <a href="/login" class="btn btn-ghost btn-sm">Login</a>
                 <a href="/register" class="btn btn-primary btn-sm">Register</a>
+            </div>
+            <div class="navbar-end gap-2" v-else>
+                <span class="text-sm">Hello, {{ $page.props.auth.user.name }}</span>
+                <form method="POST" action="/signOut">
+                    <button type="submit" class="btn btn-ghost btn-sm">Sign Out</button>
+                </form>
             </div>
         </nav>
 
