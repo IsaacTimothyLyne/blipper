@@ -16,8 +16,8 @@ export default {
     },
     methods: {
         handleBlipSubmit(blipText) {
-            const sound = this.blipSounds[Math.floor(Math.random() * this.blipSounds.length)];
-            new Audio(sound).play();
+            // const sound = this.blipSounds[Math.floor(Math.random() * this.blipSounds.length)];
+            // new Audio(sound).play();
             this.$inertia.post(
                 "/blips",
                 { message: blipText },
