@@ -25,10 +25,12 @@ RUN npm run build
 
 # Laravel setup
 RUN composer dump-autoload --optimize \
-    && php artisan config:cache \
     && php artisan route:cache \
-    && php artisan view:cache
+    && php artisan view:cache \
+    && mkdir -p database storage/logs storage/framework/sessions storage/framework/views storage/framework/cache \
+    && chmod -R 775 storage database \
+    && touch database/database.sqlite
 
 EXPOSE ${PORT:-8000}
 
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+CMD php artisan config:cache && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
