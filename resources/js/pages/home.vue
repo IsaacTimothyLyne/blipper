@@ -9,15 +9,8 @@ export default {
         BlipComposer,
         BlipFeed,
     },
-    data() {
-        return {
-            blipSounds: [3, 4, 5, 6, 7, 8, 9, 10].map(n => `/sounds/Blip${n}.wav`),
-        };
-    },
     methods: {
         handleBlipSubmit(blipText) {
-            // const sound = this.blipSounds[Math.floor(Math.random() * this.blipSounds.length)];
-            // new Audio(sound).play();
             this.$inertia.post(
                 "/blips",
                 { message: blipText },
